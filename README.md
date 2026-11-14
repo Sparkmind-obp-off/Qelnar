@@ -58,3 +58,21 @@ See the [documentation index](docs/README.md) for the complete product, customer
 ## Development rule
 
 Do not build a broad feature surface before validating the core loop. Every implementation phase must have acceptance criteria, tests, operational limits, and a rollback path.
+
+
+## Expanded product and provider architecture
+
+The current strategy is a SaaS product with optional service-assisted onboarding, governed by a provider-agnostic agentic runtime. Cloudflare is the default application foundation, not a mandatory provider for every capability. Authentication, LLMs, search, extraction and public social research use replaceable adapters.
+
+Key decisions and catalogs:
+- [Full-Agentic Product Blueprint](docs/FULL_AGENTIC_PRODUCT_BLUEPRINT.md)
+- [SaaS & Service Model](docs/SERVICE_VS_SAAS_PRODUCT_MODEL.md)
+- [Provider Catalog & Selection](docs/PROVIDER_CATALOG_AND_DECISIONS.md)
+- [Authentication & Identity](docs/AUTHENTICATION_AND_IDENTITY.md)
+- [Model Gateway & LLM Strategy](docs/MODEL_GATEWAY_AND_LLM_STRATEGY.md)
+- [Search & Web Research Providers](docs/SEARCH_AND_WEB_RESEARCH_PROVIDERS.md)
+- [Scraping & Social Research Adapters](docs/SCRAPING_AND_SOCIAL_RESEARCH_ADAPTERS.md)
+- [Cost Ledger & Usage Governance](docs/COST_LEDGER_AND_USAGE_GOVERNANCE.md)
+- [Provider Security & Data Governance](docs/PROVIDER_SECURITY_AND_DATA_GOVERNANCE.md)
+
+These remain specifications and research snapshots. They do not indicate that providers have been connected, paid plans activated, or the application deployed.
