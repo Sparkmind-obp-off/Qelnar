@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "qelnar-one",
+  "compatibility_date": "2025-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "pages_build_output_dir": "./dist",
+  "d1_databases": [
+    { "binding": "DB", "database_name": "qelnar-production", "database_id": "9e82b262-6fca-4f92-a77d-f26ffcb40334", "migrations_dir": "migrations" }
+  ],
+  "ai": { "binding": "AI" },
+  "vars": {
+    "APP_ENV": "production",
+    "CLERK_PUBLISHABLE_KEY": "pk_live_Y2xlcmsucWVsbmFyLmJpei5pZCQ",
+    "CLERK_JWT_ISSUER_DOMAIN": "https://clerk.qelnar.biz.id",
+    "AUTHORIZED_PARTIES": "https://qelnar.biz.id,https://www.qelnar.biz.id"
+  }
+}

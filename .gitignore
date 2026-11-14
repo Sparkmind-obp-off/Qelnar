@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.wrangler/
+.dev.vars
+.env
+.env.*
+*.log
+.pm2/
+logs/
+*.tar.gz
+*.zip
+coverage/
+test-results/
+playwright-report/
