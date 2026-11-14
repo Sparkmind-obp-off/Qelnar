@@ -6,7 +6,7 @@ Version 1.0 · Proposed execution plan · 2026-11-14
 Design the whole system, then ship one vertical slice at a time. A phase is complete only when tests and a demonstrated workflow pass; creating files is not proof of a working system.
 
 ## Phase A — Repository and technical proof
-Deliver app structure, React/Vite/TypeScript, Hono Worker API, D1 binding and Drizzle migrations, Better Auth D1 spike, preview/production separation and build/typecheck baseline.
+Deliver app structure, React/Vite/TypeScript, Hono Worker API, D1 binding and Drizzle migrations, Clerk + Hono Worker JWT verification spike, preview/production separation and build/typecheck baseline.
 Acceptance: local app and Worker run; health endpoint responds; migration applies; preview resources are separate; no secrets in Git or client build.
 
 ## Phase B — Command Center shell
@@ -42,3 +42,16 @@ Week 1: stack spikes, schema and app shell. Week 2: command/run/task lifecycle a
 - Internal prototype: fixtures only.
 - Private pilot: limited users, read-only provider, explicit consent, monitoring and manual support.
 - Public release: security review, terms/privacy policy, support process, export/deletion, provider approvals, cost controls and operational readiness.
+
+## Provider activation workstream
+
+Phase A identity spike is now **Clerk + React/Vite + Hono Worker JWT verification**, with Better Auth + D1 as the alternative spike if Clerk's Worker integration or commercial terms fail. Social OAuth remains separate.
+
+After the YouTube read-only slice:
+1. Add ModelGateway and run a fixed evaluation against Workers AI and Groq; do not hard-wire one vendor.
+2. Add Tavily bounded search and Firecrawl extraction only after API keys, credit limits and monthly caps are configured.
+3. Add Apify/Scrape.ly catalog adapters only after Actor schemas, plan costs and maximum charges are verified.
+4. Add TikTok and Instagram official APIs only after app approval, exact scope review and user-consented connection.
+5. Keep all external writes disabled until a separate approval and security milestone.
+
+No phase may purchase credits, upgrade a provider plan, enable automatic top-ups or run a paid Actor without explicit owner approval.
