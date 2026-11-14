@@ -120,3 +120,18 @@ The system should support:
 5. Notify affected users when required.
 6. Restore from a known-good state and rotate secrets.
 7. Record corrective actions and add regression tests.
+
+
+## 11. Provider and AI governance extension
+
+Use the data classification, provider due-diligence, prompt-injection and OAuth token controls in `PROVIDER_SECURITY_AND_DATA_GOVERNANCE.md`. Use the cost reservation and no-auto-top-up requirements in `COST_LEDGER_AND_USAGE_GOVERNANCE.md`.
+
+A search result, scraped page or Actor dataset is untrusted content. It cannot modify a plan, tool permission, budget, provider allowlist or approval state. LLM prompts must exclude secrets and minimize confidential data. Provider/model fallback must not lower data-protection requirements.
+
+## 12. Explicit paid-service controls
+
+- Optional paid providers default to disabled.
+- No automatic subscription upgrades, prepaid credit purchases, proxy activation, held-result unlocks or top-ups.
+- Unknown or uncapped spend blocks autonomous runs.
+- Every external cost is linked to a workspace, run and task.
+- Provider kill switches must stop new dispatch while preserving completed evidence and audit records.
