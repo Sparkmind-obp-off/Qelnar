@@ -239,3 +239,18 @@ Split services only when scale, reliability, security isolation, or team ownersh
 - Deployment and preview/prod separation.
 
 Resolve these with short decision records and technical spikes, not assumptions.
+
+
+## 12. Expanded control planes and provider-agnostic runtime
+
+The architecture now explicitly separates:
+- **Identity plane:** Clerk or Better Auth for QELNAR sign-in; internal user/workspace mapping.
+- **Connected-account plane:** independent OAuth grants for YouTube, TikTok, Instagram and other platforms.
+- **Model plane:** ModelGateway with provider/model policy, budgets, schema validation and fallback.
+- **Research plane:** Tavily search, Firecrawl extraction/crawl, and optional Apify/Scrape.ly/Brave adapters.
+- **Cost plane:** preflight estimates, reservations, usage ledger, reconciliation and kill switches.
+- **Evidence plane:** source URL, provider, timestamps, hashes, extraction metadata and claim linkage.
+
+The Worker remains the policy and dispatch boundary. Agents never receive provider secrets or unrestricted network access. Provider adapters are replaceable modules; D1 stores product state, Workflows stores durable execution checkpoints and R2 stores approved artifacts.
+
+Refer to `FULL_AGENTIC_PRODUCT_BLUEPRINT.md`, `PROVIDER_CATALOG_AND_DECISIONS.md` and the provider-specific strategy documents for current decisions.
