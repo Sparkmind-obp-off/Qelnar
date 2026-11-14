@@ -15,6 +15,7 @@ Engineering:
 - [Technology Stack Decision](TECH_STACK_DECISION.md)
 - [Agentic Runtime & Orchestration](AGENTIC_RUNTIME_AND_ORCHESTRATION.md)
 - [Data Model & Storage](DATA_MODEL_AND_STORAGE.md)
+- [Backend API Contracts](BACKEND_API_CONTRACTS.md)
 - [Integration & Provider Strategy](INTEGRATION_AND_PROVIDER_STRATEGY.md)
 
 Execution and governance:
