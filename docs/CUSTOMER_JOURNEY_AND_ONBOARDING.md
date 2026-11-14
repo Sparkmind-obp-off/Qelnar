@@ -50,3 +50,9 @@ A workspace is activated when it has a configured goal, at least one authorized 
 - Missing data is never represented as zero.
 - Provide disconnect, export and deletion paths.
 - Keyboard-first command entry and responsive mobile layouts.
+
+## Provider transparency and pricing moments
+
+Before a user connects a source, explain which identity provider signs them in versus which platform account is being connected. Before a research run, show the source list, record/page caps, model selection policy, expected provider usage, maximum spend and whether data leaves QELNAR's Cloudflare environment. Do not imply that a provider's free developer tier guarantees QELNAR service is free at every scale.
+
+Offer an assisted onboarding session only as an optional, clearly scoped service. The user must still be able to complete the core self-serve workflow.
