@@ -53,11 +53,7 @@ The project begins with product and architecture foundations, then a thin vertic
 
 **Foundation / planning stage.** This repository is being established. No production system, integrations, credentials, or live automation should be assumed to exist until implemented and tested.
 
-See:
-- [Product Charter](docs/PRODUCT_CHARTER.md)
-- [System Architecture](docs/SYSTEM_ARCHITECTURE.md)
-- [Roadmap](docs/ROADMAP.md)
-- [Security and Governance](docs/SECURITY_AND_GOVERNANCE.md)
+See the [documentation index](docs/README.md) for the complete product, customer, UX, architecture, stack, data, integration, metrics, implementation and governance specifications.
 
 ## Development rule
 
