@@ -1,78 +1,65 @@
 # QELNAR One
 
-**One Command. Total Intelligence.**
+**One Command. Total Intelligence.** — Full-Agentic Creator Intelligence OS (SaaS + Creator Intelligence as a Service), Indonesia-first.
 
-QELNAR One is the working product name for a **Full-Agentic Creator Intelligence Operating System**: a unified command center that helps creators and creator-led businesses observe their environment, understand what matters, decide what to do, coordinate execution, measure outcomes, and continuously learn.
+## URLs
+- **Production (Cloudflare Pages, BYOK):** https://qelnar-one.pages.dev
+- **Custom domain:** https://qelnar.biz.id — attached to the Pages project, **waiting for DNS CNAME** (see Deployment)
+- **Health:** `/api/health` → `{"db":true,"auth":"clerk_production"}`
+- **GitHub:** https://github.com/Sparkmind-obp-off/Qelnar
 
-> **Product principle:** one command center, many specialist agents, one governed operating system.
+## Implemented
+| Area | Status |
+|---|---|
+| Clerk Production auth, **Google OAuth only** (custom `authenticateWithRedirect` flow, `/sso-callback`) | ✅ code + backend JWT verification (JWKS, issuer, authorized parties) |
+| Protected frontend routes (`/app/*`) and backend (`/api/v1/*`) | ✅ 401 on missing/invalid token (verified in production) |
+| User sync (Clerk → D1), AuthProvider abstraction (frontend + backend) | ✅ |
+| Workspaces, onboarding, RBAC (owner/admin/member/viewer), invites, isolation (cross-tenant = 404) | ✅ tested |
+| Command Center: Intent Router → Planner → Policy Engine → Agent/Tool Registry → Run Coordinator | ✅ |
+| Durable runs (D1 state, lease lock, retry, resume on poll), approvals H0–H3 (no blanket approval) | ✅ |
+| Evidence service (URL, provider, timestamp, sha256), cited reports, measurement, learning memory, feedback | ✅ |
+| Providers: Tavily (search), Firecrawl (extract), Workers AI Llama 3.3 70B (synthesis) + extractive fallback | ✅ live in production |
+| Apify / Scrape.ly | 🔒 keys stored as secrets, **disabled** — require owner approval of cost |
+| Usage ledger, per-run budget, monthly credit/run caps, provider monthly USD caps | ✅ |
+| Plans & entitlements (Trial/Solo/Pro/Studio/Business) enforced server-side, locked prices | ✅ |
+| Billing: upgrade requests + manual admin activation | ✅ (**no live payment provider**) |
+| Service catalog (5 packages), requests, scoping, delivery report, hours/paid tracking | ✅ |
+| Admin Console (server-side `requireAdmin`): unit economics, billing, services, pricing, providers, users, audit | ✅ |
+| Tests: 16 unit + 19 integration (Vitest) | ✅ 35/35 |
 
-## Product identity
+## Production verification done
+- Real orchestrator run in production D1 with real Tavily + Firecrawl + Workers AI: 11 steps completed, 15 evidence items, cited report generated, H2 approval gate respected, 16/16 credits, ≈ USD 0.038.
+- `/api/v1/*` and `/api/v1/admin/*` return 401 without a valid Clerk token; internal self-test endpoint returns 404 without its secret.
+- No secrets in the client bundle or in git.
 
-- **Brand:** QELNAR
-- **Product:** QELNAR One
-- **Category:** Full-Agentic Creator Intelligence OS
-- **Core interface:** One Command Center
-- **Positioning line:** One Command. Total Intelligence.
-- **Independence:** QELNAR is an independent brand and project, separate from HOLBERY and AVORLUNE.
+## NOT yet verified (blockers)
+1. **DNS:** add `CNAME qelnar.biz.id → qelnar-one.pages.dev` (proxied) and `CNAME www → qelnar-one.pages.dev`. The Cloudflare API token lacks `Zone:DNS:Edit`.
+2. **Real Google sign-in E2E** (needs a human Google account on `https://qelnar.biz.id` after DNS). Clerk Production session cookies are bound to `qelnar.biz.id`, so login will not work on `*.pages.dev`.
+3. **Clerk Dashboard:** confirm Google uses **custom OAuth credentials** (required in production) and email/password/OTP/other socials are disabled.
+4. Payment provider (Midtrans/Xendit) not integrated — billing is manual.
 
-## What QELNAR One is
+## API (summary)
+Public: `GET /api/health`, `GET /api/config`, `GET /api/public/plans`, `GET /api/public/services`  
+Auth (`Authorization: Bearer <Clerk JWT>`, `X-Workspace-Id`): `/api/v1/me`, `/onboarding`, `/workspaces`, `/workspace[/members|/invites|/projects|/tasks|/usage|/audit|/learnings]`, `/command` (`dryRun` preview), `/runs[/:id|/resume|/cancel]`, `/approvals[/:id/decide]`, `/reports[/:id|/export|/feedback]`, `/evidence`, `/billing[/change]`, `/service-requests`  
+Admin: `/api/v1/admin/{overview,users,workspaces,plans,billing-requests,services,service-requests,providers,settings,audit}`
 
-QELNAR One is not intended to be a collection of disconnected AI chatbots or a dashboard that only displays metrics. It is designed as an agentic operating layer that connects creator intelligence, strategy, workflows, production coordination, analytics, and business operations through a governed orchestration system.
+## Data (Cloudflare D1 `qelnar-production`)
+users, workspaces, workspace_members, workspace_invites, projects, tasks, runs, run_steps, approvals, evidence, reports, memories, usage_ledger, audit_log, plans, subscriptions, billing_requests, service_packages, service_requests, provider_settings, app_settings.
 
-The system is intended to support a continuous loop:
+## Stack
+React 19 + Vite + Tailwind 4 (SPA) · Hono on Cloudflare Pages Functions (`_worker.js`) · D1 · Workers AI · Zod · Clerk · Vitest.
+Deviation from brief: SQL via a thin typed helper instead of Drizzle; durable execution via D1 lease state machine instead of Cloudflare Workflows (not available to Pages projects).
 
-**Observe → Understand → Decide → Plan → Execute → Measure → Learn**
+## Deployment (BYOK)
+```bash
+npm run build
+npx wrangler d1 migrations apply qelnar-production --remote
+npx wrangler pages deploy dist --project-name qelnar-one --branch main
+```
+Secrets (set via `wrangler pages secret`, never committed): `CLERK_SECRET_KEY, TAVILY_API_KEY, FIRECRAWL_API_KEY, APIFY_API_TOKEN, SCRAPELY_API_KEY, ADMIN_EMAILS, INTERNAL_SELFTEST_TOKEN`. Public vars in `wrangler.jsonc`.
+Local: copy secrets into `.dev.vars`, `npm run db:migrate:local`, `pm2 start ecosystem.config.cjs`.
 
-## Foundational principles
+## Pricing (hypotheses to validate)
+Trial Rp0 · Solo Rp149.000 · Creator Pro Rp299.000 · Studio Rp799.000 · Business custom. Services Rp499.000 – Rp4.500.000. Validate with interviews, pilot conversion, actual cost per run, retention, margin.
 
-1. **One command surface:** users should have one coherent place to express goals, inspect work, approve actions, and understand outcomes.
-2. **Orchestrated specialists:** specialist agents work under a central orchestrator; they do not become independent, uncontrolled authorities.
-3. **Evidence before conclusions:** insights must identify their sources, timestamps, confidence, and limitations.
-4. **Human control:** consequential external actions require explicit authorization and must be auditable.
-5. **Provider-agnostic integrations:** use supported APIs and providers through replaceable adapters; never assume a connector is available until verified.
-6. **Least privilege:** every integration receives only the permissions it needs.
-7. **Cost-aware execution:** show estimated or known usage/cost before expensive work; do not trigger paid services without authorization.
-8. **Modular evolution:** build a dependable core before adding specialist capabilities.
-9. **Privacy and ownership:** connected accounts and data remain under the user's control; never use accounts or data without authorization.
-10. **No fabricated intelligence:** the system must distinguish verified data, inference, recommendation, and unknowns.
-
-## Initial build sequence
-
-The project begins with product and architecture foundations, then a thin vertical slice:
-
-1. Product charter, architecture, threat model, and delivery roadmap.
-2. Repository conventions, environment strategy, and deployment decision.
-3. Secure identity, workspace, permissions, audit trail, and command center shell.
-4. Orchestrator runtime, task state machine, tool registry, approvals, and event history.
-5. First read-only creator intelligence workflow using one authorized data source.
-6. Evidence-backed insight and recommendation workflow.
-7. Human-approved execution workflow.
-8. Specialist agents and additional integrations, added incrementally.
-
-## Current status
-
-**Foundation / planning stage.** This repository is being established. No production system, integrations, credentials, or live automation should be assumed to exist until implemented and tested.
-
-See the [documentation index](docs/README.md) for the complete product, customer, UX, architecture, stack, data, integration, metrics, implementation and governance specifications.
-
-## Development rule
-
-Do not build a broad feature surface before validating the core loop. Every implementation phase must have acceptance criteria, tests, operational limits, and a rollback path.
-
-
-## Expanded product and provider architecture
-
-The current strategy is a SaaS product with optional service-assisted onboarding, governed by a provider-agnostic agentic runtime. Cloudflare is the default application foundation, not a mandatory provider for every capability. Authentication, LLMs, search, extraction and public social research use replaceable adapters.
-
-Key decisions and catalogs:
-- [Full-Agentic Product Blueprint](docs/FULL_AGENTIC_PRODUCT_BLUEPRINT.md)
-- [SaaS & Service Model](docs/SERVICE_VS_SAAS_PRODUCT_MODEL.md)
-- [Provider Catalog & Selection](docs/PROVIDER_CATALOG_AND_DECISIONS.md)
-- [Authentication & Identity](docs/AUTHENTICATION_AND_IDENTITY.md)
-- [Model Gateway & LLM Strategy](docs/MODEL_GATEWAY_AND_LLM_STRATEGY.md)
-- [Search & Web Research Providers](docs/SEARCH_AND_WEB_RESEARCH_PROVIDERS.md)
-- [Scraping & Social Research Adapters](docs/SCRAPING_AND_SOCIAL_RESEARCH_ADAPTERS.md)
-- [Cost Ledger & Usage Governance](docs/COST_LEDGER_AND_USAGE_GOVERNANCE.md)
-- [Provider Security & Data Governance](docs/PROVIDER_SECURITY_AND_DATA_GOVERNANCE.md)
-
-These remain specifications and research snapshots. They do not indicate that providers have been connected, paid plans activated, or the application deployed.
+_Last updated: 2026-11-14_

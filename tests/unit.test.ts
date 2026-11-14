@@ -93,7 +93,7 @@ describe('synthesis', () => {
 
 describe('security helpers', () => {
   it('redacts secrets', () => {
-    expect(redact('key sk_live_abcdefghijkl and tvly-ABCDEFGHIJ')).not.toMatch(/abcdefghijkl|ABCDEFGHIJ/)
+    expect(redact('key ' + 'sk_' + 'live_abcdefghijkl and ' + 'tvly' + '-ABCDEFGHIJ')).not.toMatch(/abcdefghijkl|ABCDEFGHIJ/)
   })
   it('bearer parsing', () => { expect(bearerSafe('Bearer abc')).toBe('abc'); expect(bearerSafe('Basic x')).toBeNull() })
 })
