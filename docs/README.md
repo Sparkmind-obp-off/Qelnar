@@ -28,3 +28,14 @@ Execution and governance:
 
 ## Document status
 These are product and architecture specifications, not evidence of a deployed application. Stack and provider decisions remain subject to technical spikes, live API review, customer validation and cost checks.
+
+Provider and product strategy:
+- [Full-Agentic Product Blueprint](FULL_AGENTIC_PRODUCT_BLUEPRINT.md)
+- [SaaS & Service Model](SERVICE_VS_SAAS_PRODUCT_MODEL.md)
+- [Provider Catalog & Selection Matrix](PROVIDER_CATALOG_AND_DECISIONS.md)
+- [Authentication & Identity](AUTHENTICATION_AND_IDENTITY.md)
+- [Model Gateway & LLM Strategy](MODEL_GATEWAY_AND_LLM_STRATEGY.md)
+- [Search & Web Research Providers](SEARCH_AND_WEB_RESEARCH_PROVIDERS.md)
+- [Scraping & Social Research Adapters](SCRAPING_AND_SOCIAL_RESEARCH_ADAPTERS.md)
+- [Cost Ledger & Usage Governance](COST_LEDGER_AND_USAGE_GOVERNANCE.md)
+- [Provider Security & Data Governance](PROVIDER_SECURITY_AND_DATA_GOVERNANCE.md)
