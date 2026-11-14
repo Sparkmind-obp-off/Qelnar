@@ -53,3 +53,7 @@ Indonesia-first language and workflows, with a data model and provider adapters 
 - Predicts virality or guarantees performance.
 - Real-time where source APIs provide delayed, sampled or quota-limited data.
 - Free when provider usage may incur charges.
+
+## Operating and commercial model clarification
+
+QELNAR One is a SaaS operating product with optional assisted onboarding/research. It is not positioned as an agency or a freelancer marketplace. Its full-agentic promise is bounded by source permissions, tool policies, transparent budgets and human approval for external side effects. The system can coordinate work autonomously inside the user's authorized scope; it must not claim unrestricted autonomy.
