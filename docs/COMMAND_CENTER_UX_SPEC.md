@@ -49,3 +49,18 @@ React + TypeScript, Tailwind design tokens, accessible Radix primitives via shad
 
 ## MVP screens
 Sign in/workspace creation; onboarding; Command Center; run preview; run detail; insight detail; approvals; sources; agent registry; workspace settings and audit.
+
+## Provider and budget UX extension
+
+The Sources page must separate QELNAR sign-in from connected social accounts and public research providers. Show each provider's state, scopes, data freshness, quota, credential owner, pricing snapshot date and disconnect/disable control.
+
+The run preview must show:
+- Selected model/provider or routing policy.
+- Search queries and maximum result/page count.
+- Actor ID and maximum result count if scraping is proposed.
+- Estimated and maximum spend, including add-ons.
+- Data classification and where content will be processed.
+- Free-quota vs paid-credit status.
+- A clear “not executed” state until the user confirms paid work.
+
+The usage view must distinguish QELNAR subscription allowance from upstream API/provider costs. Never label a workflow “free” solely because the provider has a free tier.
