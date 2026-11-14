@@ -38,3 +38,15 @@ Unauthorized external side effects: zero. Secret leakage: zero. Cross-workspace 
 
 ## Metric governance
 Every metric defines event schema, numerator/denominator, time window/timezone, exclusions, source of truth, owner and version. Do not optimize for agent-call volume, dashboard visits or generated-content count; those are activity metrics, not proof of value.
+
+## Provider and commercial guardrails
+
+Segment WEAW and cost metrics by provider and model policy version. Track:
+- Search credits per evidence-backed insight.
+- Pages fetched per completed research run.
+- Actor spend per usable normalized record.
+- Model cost per accepted recommendation.
+- Provider failure/fallback rate and price-estimate variance.
+- Percentage of workflows completed on free quota vs paid usage.
+
+A low-cost workflow is not successful if evidence quality, source diversity or user trust declines. Do not reward raw scraped-result volume.
