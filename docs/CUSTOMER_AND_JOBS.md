@@ -69,3 +69,12 @@ Do not lead with a product pitch. Record exact phrases, workflow evidence, frequ
 - Repeat value: users return to review evidence or outcomes in a second week.
 - Trust evidence: users can explain why an insight exists and what permission an action needs.
 - Commercial evidence: obtain explicit willingness-to-pay evidence before adding paid provider infrastructure.
+
+## Business-model validation
+
+The first customer interviews must distinguish demand for:
+- A self-serve intelligence SaaS.
+- A recurring research/reporting service.
+- A hybrid product with assisted setup.
+
+Do not infer that users want an agency or managed-service model merely because the early product needs manual onboarding. Record willingness to pay separately for software access and optional human assistance. See `SERVICE_VS_SAAS_PRODUCT_MODEL.md`.
