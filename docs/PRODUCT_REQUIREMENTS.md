@@ -76,3 +76,23 @@ Security: no secrets in browser bundles or repository. Isolation: workspace chec
 
 ## Exclusions
 No autonomous public publishing, DMs, ad spend, paid scraping, bulk creator harvesting, private data access without OAuth consent, vector database, billing or enterprise multi-tenant controls in the first release.
+
+## Expanded agentic and provider requirements
+
+- Command planner must show a typed plan, missing inputs, selected agents/tools, source scope, maximum cost, data class and approval gates.
+- ModelGateway must support provider allowlists, task routing, structured outputs, token caps, latency limits and recorded usage.
+- Research pipeline must distinguish search snippets from fetched evidence and preserve source provenance.
+- Provider catalog must expose status as mock, available, connected, disabled, degraded or blocked; catalog presence is not a connected state.
+- Usage ledger must reserve budget before dispatch and reconcile actual cost.
+- Users must be able to inspect and revoke connected accounts and disable optional providers.
+- External side effects remain individually gated by exact payload approval.
+
+## Additional acceptance criteria
+
+- A provider cannot be called when disabled or outside its budget.
+- A model cannot receive secrets or a data class disallowed by its policy.
+- Search claims link to fetched source evidence, not only snippets.
+- Paid Actor calls are blocked without explicit approval and a hard cap.
+- A failed provider call cannot trigger an unapproved paid fallback.
+- The UI distinguishes product plan allowance from upstream provider charges.
+- Workspace export/deletion includes evidence metadata and connected-account token revocation workflows.
