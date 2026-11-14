@@ -117,3 +117,15 @@ Potential work:
 ## Priority rule
 
 A reliable command → evidence → approval → action → outcome loop is more valuable than a large dashboard full of disconnected modules. Build vertically, test continuously, and expand only when the previous phase is stable.
+
+
+## Provider and business-model alignment — 2026-11-14
+
+The roadmap follows the provider tiers and service model:
+- Identity: Clerk managed-first pilot candidate; Better Auth self-hosted fallback behind AuthProvider.
+- Models: ModelGateway first; Workers AI/Groq candidate adapters; AI Gateway optional.
+- Search/extraction: Tavily and Firecrawl candidate adapters with strict query/page/credit caps.
+- Social research: official APIs first; Apify/Scrape.ly optional public research adapters, disabled by default.
+- Commercial model: self-serve SaaS core with optional assisted onboarding; packaging only after pilot validation.
+
+Before moving from Phase 3 to broader intelligence, prove one bounded evidence loop and reconcile its actual cost. Do not expand to multiple scrapers or providers merely to increase feature count.
