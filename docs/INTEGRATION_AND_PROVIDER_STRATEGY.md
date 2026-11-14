@@ -57,3 +57,14 @@ Capture official docs/terms, app owner and environment, scopes and review status
 3. TikTok Display API after app registration and scope review.
 4. Instagram Professional API after Meta app setup/review.
 5. Other sources only when customer evidence shows demand.
+
+## Expanded provider portfolio — 2026-11-14
+
+The former narrow integration list is extended by the provider matrix in `PROVIDER_CATALOG_AND_DECISIONS.md`. Search, extraction, LLM inference, app authentication and social account OAuth are separate capabilities and must have separate adapters and credential lifecycles.
+
+- Clerk is the managed-first sign-in candidate; Better Auth remains a self-hosted alternative. Neither authenticates social account access.
+- Workers AI and Groq are early LLM candidates behind ModelGateway; AI Gateway is optional middleware.
+- Tavily is the primary bounded web-search candidate; Firecrawl is the crawl/extraction candidate.
+- Apify and Scrape.ly are optional public research adapters, not substitutes for official connected-account APIs.
+
+See `SEARCH_AND_WEB_RESEARCH_PROVIDERS.md` and `SCRAPING_AND_SOCIAL_RESEARCH_ADAPTERS.md` for catalog-level cost observations and run guardrails. All prices are snapshots; no paid Actor or provider has been activated.
