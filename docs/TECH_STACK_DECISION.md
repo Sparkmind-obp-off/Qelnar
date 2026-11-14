@@ -83,3 +83,20 @@ Workers Free has published daily request and CPU limits; D1, Workflows and other
 4. OAuth callback and encrypted refresh-token storage.
 5. YouTube API quota tracking and bounded ingestion.
 6. Preview/production isolation and secret handling.
+
+## Provider decisions update — 2026-11-14
+
+The provider catalog and detailed decisions are now maintained in:
+- `PROVIDER_CATALOG_AND_DECISIONS.md`
+- `AUTHENTICATION_AND_IDENTITY.md`
+- `MODEL_GATEWAY_AND_LLM_STRATEGY.md`
+- `SEARCH_AND_WEB_RESEARCH_PROVIDERS.md`
+- `SCRAPING_AND_SOCIAL_RESEARCH_ADAPTERS.md`
+
+**Authentication decision refined:** Clerk is now the managed-first candidate for the customer-facing pilot, provided the account owner accepts its data-processing and pricing terms and the React/Vite + Hono Worker JWT verification spike passes. Better Auth remains the self-hosted alternative when vendor independence and D1-native identity storage are more important. Both must sit behind an AuthProvider boundary. This supersedes the earlier default assumption that Better Auth should be selected first.
+
+**LLM decision refined:** no single model vendor is selected as the permanent default. Implement an internal ModelGateway and compare Workers AI, Groq, OpenRouter and direct Gemini/OpenAI/Anthropic adapters using a fixed evaluation set. Cloudflare AI Gateway is optional routing/observability and billing infrastructure, not a model. BYOK, Unified Billing and direct provider billing have different cost and credential behavior.
+
+**Search/research decision refined:** Tavily is the first candidate for bounded agentic web search; Firecrawl is the first candidate for multi-page extraction/crawl. Apify and Scrape.ly remain optional social/public research catalogs. Every paid action is disabled until explicit approval and a hard cost cap are available.
+
+The current pricing figures and free allowances are dated research snapshots, not durable guarantees. Revalidate official provider pages immediately before activation.
