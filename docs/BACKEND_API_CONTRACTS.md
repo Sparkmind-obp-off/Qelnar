@@ -134,3 +134,26 @@ Examples: command.received, run.validated, plan.created, approval.requested, app
 
 ## API versioning
 Keep the first release at v1. Add fields compatibly where possible. Breaking changes require a new version or explicit migration. Persist schema_version for durable workflow payloads and provider snapshots so old runs remain interpretable.
+
+## Provider, model and cost endpoints — extension
+
+Add the following endpoints to the v1 contract as the provider catalog is implemented:
+
+### Model policy
+- GET /api/v1/models — allowed provider/model catalog, capabilities and pricing snapshot timestamp.
+- GET /api/v1/model-policies — workspace-visible task routing policy.
+- PATCH /api/v1/model-policies/:policyId — authorized model policy update; audit required.
+
+### Research
+- POST /api/v1/workspaces/:workspaceId/research/preview — build a bounded query/fetch plan without executing it.
+- POST /api/v1/workspaces/:workspaceId/research/runs — start an approved research run.
+- GET /api/v1/research/runs/:researchRunId — status, sources, usage and evidence.
+- GET /api/v1/research/evidence — list evidence by source, run, date or topic.
+
+### Usage and budgets
+- GET /api/v1/workspaces/:workspaceId/budgets — current caps and reservations.
+- PATCH /api/v1/workspaces/:workspaceId/budgets/:budgetId — update limits; owner/admin only.
+- GET /api/v1/workspaces/:workspaceId/usage/ledger — paginated immutable usage entries.
+- POST /api/v1/workspaces/:workspaceId/providers/:providerId/disable — emergency provider kill switch.
+
+All preview and execution endpoints must return a maximum cost or an explicit unknown marker. The server must reserve budget before dispatch and reconcile actual usage after completion. Unknown-price paid operations are rejected unless a separately authorized operator override exists.
