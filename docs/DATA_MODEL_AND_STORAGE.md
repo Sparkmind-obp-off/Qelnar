@@ -53,3 +53,18 @@ Collect minimum fields for a declared purpose; normalize and preserve provenance
 
 ## Analytics evolution
 D1 is acceptable for the first bounded operational dataset. Do not turn it into a warehouse by default. If time-series volume, concurrency or complex joins become a bottleneck, add an analytical store or managed PostgreSQL/warehouse behind an interface based on benchmark results.
+
+## Provider and cost entities extension
+
+Add the following logical entities:
+- auth_identities: auth_provider, auth_subject, internal_user_id, created_at; unique(provider, subject).
+- model_provider_configs: provider, model_id, capability, enabled, data_class_policy, pricing_snapshot_id.
+- model_policy_versions: task_type, routing rules, fallback order, token caps, timeout, evaluation version.
+- research_jobs: query plan, provider, query/page/result caps, max cost, state.
+- research_sources: canonical URL, publisher, published_at, retrieved_at, content hash, fetch status and trust classification.
+- provider_pricing_snapshots: provider, product/Actor/model, unit, unit price, currency, source URL and observed_at.
+- budget_reservations: workspace, run, provider, maximum reserved amount, currency, status.
+- usage_ledger_entries: quantity, unit, estimated/actual cost, provider receipt, pricing snapshot and reconciliation state.
+- provider_kill_switches: provider, scope, enabled state, actor and audit reference.
+
+Store encrypted credential ciphertext or external secret references only; never store raw secrets in ordinary fields. Keep provider price snapshots immutable so historical runs can be recalculated against the price they actually used.
